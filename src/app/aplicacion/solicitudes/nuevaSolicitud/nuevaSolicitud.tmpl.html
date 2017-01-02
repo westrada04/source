@@ -12,7 +12,7 @@
 
                 <md-input-container class="md-block">
                     <label for="rol">Solicitud</label>
-                    <md-select ng-change="vm.change()" placeholder="selecionar solicitud" name="solicitud" ng-model="vm.solicitud" data-md-container-class="selectdemoSelectHeader" required>
+                    <md-select ng-change="vm.change()" placeholder="Selecionar solicitud" name="solicitud" ng-model="vm.solicitud" data-md-container-class="selectdemoSelectHeader" required>
 
                         <md-select-header class="demo-select-header">
                             <input ng-model="vm.filtrar" type="search" placeholder="Buscar solicitud" class="demo-header-searchbox md-text" ng-keydown="vm.onSearchChange($event)">
@@ -59,11 +59,14 @@
 
                 <md-input-container class="md-block">
                     <div layout="row" layout-align="space-around center">
-                        <md-button class="md-primary md-raised md-fab" ngf-select="vm.upload($file)"  ngf-accept="'image/*,application/pdf'" ngf-max-size="2MB" aria-label="upload">
+                        <md-button class="md-primary md-raised md-fab" ngf-select="vm.upload($files)" ngf-multiple="true" ngf-accept="'image/*,application/pdf'" ngf-max-size="2MB" aria-label="upload">
                             <md-icon md-font-icon ng-class="{ 'zmdi zmdi-cloud-upload': vm.status == 'idle', 'fa fa-spinner fa-pulse': vm.status == 'uploading', 'zmdi zmdi-check': vm.status == 'complete'}"></md-icon>
                         </md-button>
-                        <md-tooltip ng-if="!vm.file">Selecionar Archivo</md-tooltip>
-                        <md-tooltip ng-if="vm.file">{{ vm.file.name }}</md-tooltip>
+                        <md-tooltip ng-if="!vm.fileList">Selecionar Archivo</md-tooltip>
+                        
+                        <md-tooltip ng-if="vm.fileList">
+                            <span ng-repeat="f1 in vm.fileList"> {{ f1.name }} </span> 
+                        </md-tooltip>
                         
                     </div>
                 </md-input-container>
