@@ -17,7 +17,7 @@
         vm.enviar = enviar;
         vm.solicitud;
         vm.descripcion;
-
+        
         vm.solicitudes = [
             'Validación de practicas profesionales',
             'Inscripción de diplomado como opción de grado',
@@ -30,11 +30,11 @@
             'Solicitud personalizada'
         ];
 
-        var fileList;
+        vm.fileList;
         ////////////////
 
         function disabledForm(form) {
-            return (form && (vm.file || vm.personalizar)) ? false : true;
+            return (form && (vm.fileList || vm.personalizar)) ? false : true;
         }
 
         function change() {
@@ -44,18 +44,16 @@
             } else if (vm.solicitud == 'Solicitud personalizada') {
                 vm.personalizar = true;
                 vm.validacion = false;
-
             } else {
                 vm.personalizar = false;
                 vm.validacion = false;
             }
         }
 
-        function upload($file) {
-            if ($file !== null) {
-                vm.file = $file;
+        function upload($files) {
+            if ($files !== null && $files.length > 0) {
+                vm.fileList = $files;
                 uploadStarted();
-
                 $timeout(uploadComplete, 2000);
             }
         }
@@ -66,8 +64,11 @@
 
         function uploadComplete() {
             vm.status = 'complete';
-            var message = 'Gracias por ' + vm.file.name;
-
+            var message = 'Gracias por !';
+            for(var file in vm.fileList){
+                message += vm.fileList[file].name + ' ';
+            }
+            
             $mdToast.show({
                 template: '<md-toast><span flex>' + message + '</span></md-toast>',
                 position: 'bottom right',
@@ -95,13 +96,14 @@
             Upload.upload({
                 url: API_BACKEND.url +'/cargar',
                 data: {
-                    file : vm.file,
+                    file : vm.fileList,
                     solicitud : solicitud,
                     descripcion : vm.descripcion
                 },
                 method: 'post'
             }).then(function (data) {
                 console.log(data);
+                console.log(vm.fileList);
             }, function (data) {
                 console.log('error' + data);
             }, function (data) {
