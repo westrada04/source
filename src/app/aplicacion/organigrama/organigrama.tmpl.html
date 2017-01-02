@@ -1,0 +1,129 @@
+<br>
+<div layout="column" flex>
+    <div id="mynetwork" style="height: 400px;"></div>
+</div>
+<script type="text/javascript">
+    $('document').ready(function() {
+
+        var options = {
+            groups: {
+                usergroups: {
+                    shape: 'icon',
+                    icon: {
+                        face: 'Ionicons',
+                        code: '\uf47c',
+                        size: 50,
+                        color: '#57169a'
+                    }
+                },
+                users: {
+                    shape: 'icon',
+                    icon: {
+                        face: 'Ionicons',
+                        code: '\uf47e',
+                        size: 50,
+                        color: '#aa00ff'
+                    }
+                }
+            }
+        };
+
+        var nodes = [{
+            id: 1,
+            label: 'Director de Programa',
+            group: 'users'
+        }, {
+            id: 2,
+            label: 'Coordinador de Programa',
+            group: 'users'
+        }, {
+            id: 3,
+            label: 'Profesores',
+            group: 'usergroups'
+        }, {
+            id: 4,
+            label: 'Representantes',
+            group: 'usergroups'
+        }, {
+            id: 5,
+            label: 'Consejo de Programa',
+            shape: 'icon',
+            icon: {
+                face: 'Ionicons',
+                code: '\uf276',
+                size: 50,
+                color: '#f0a30a'
+            }
+        }, {
+            id: 6,
+            label: 'Representante Estudiantil',
+            group: 'users'
+        }, {
+            id: 7,
+            label: 'Representante de Egresados',
+            group: 'users'
+        }, {
+            id: 8,
+            label: 'Profesores Principales',
+            group: 'usergroups'
+        }, {
+            id: 9,
+            label: 'Profesores Suplentes',
+            group: 'usergroups'
+        }];
+
+        var edges = [{
+            from: 1,
+            to: 4
+        }, {
+            from: 1,
+            to: 3
+        }, {
+            from: 1,
+            to: 2
+        }, {
+            from: 5,
+            to: 1
+        }, {
+            from: 4,
+            to: 6
+        }, {
+            from: 4,
+            to: 7
+        }, {
+            from: 3,
+            to: 8
+        }, {
+            from: 3,
+            to: 9
+        }];
+
+        var container = document.getElementById('mynetwork');
+        var data = {
+            nodes: nodes,
+            edges: edges
+        };
+
+        var network = new vis.Network(container, data, options);
+
+        var options = {
+            physics: {
+                enabled: true,
+                repulsion: {
+                    centralGravity: 0.2,
+                    springLength: 200,
+                    springConstant: 0.05,
+                    nodeDistance: 100,
+                    damping: 0.09
+                }
+            }
+        }
+        network.setOptions(options);
+        setInterval(change, 1);
+
+        function change() {
+            network.redraw();
+        }
+    });
+
+</script>

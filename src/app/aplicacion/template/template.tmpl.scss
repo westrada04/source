@@ -1,0 +1,34 @@
+.seed-list {
+    list-style: lower-greek;
+}
+
+.texto {
+    color: white;
+}
+
+.fondo-footer {
+    background-image: linear-gradient(to bottom, #c99541 10%, #004176 10%);
+    color: white;
+    text-align: center;
+}
+
+.space {
+    height: 5px;
+}
+
+.head-banner {
+    background: #004176;
+}
+
+.imagen-banner {
+    background-image: url(../assets/images/banner.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    height: 72px;
+    margin: 10px;
+}
+
+.fondo-menu {
+    background-color: #c99541 !important;
+}

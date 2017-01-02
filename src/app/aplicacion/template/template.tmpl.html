@@ -1,0 +1,87 @@
+<div layout="column" flex>
+
+<div class="head-banner">
+    <div class="imagen-banner img-response"></div>
+</div>
+
+
+  <md-toolbar class="fondo-menu">
+    <div class="md-toolbar-tools">
+      <md-button class="md-icon-button" ng-click="vm.openSideNavPanel()" aria-label="Menu">
+        <md-tooltip>Menu de Opciones</md-tooltip>
+        <md-icon md-font-icon="zmdi zmdi-menu"></md-icon>
+      </md-button>
+      <span flex></span>
+      <h2>
+        <md-icon md-font-icon="fa fa-sign-in" aria-label="Iniciar Session"></md-icon>
+        <span class="md-subhead" ui-sref="template.login" >Iniciar Sesión</span>
+      </h2>
+    </div>
+  </md-toolbar>
+
+  <div ui-view="contenido"></div>
+<div flex></div>
+  <footer layout="column" >
+    <div class="fondo-footer" layout-padding> 
+      <div class="space"></div>
+      Dirección: Carrera 32 No 22 - 08 | Edificio Ciénaga Grande. Primer Piso | Telefono : 57 5 4301292 Ext. 362 Copyright 2016 Universidad del Magdalena
+      <br>   
+      Facultad de Ingenieria - Ingeniería de Sistemas ® Todos los Derechos Reservados
+      <br>
+      <br>
+    </div>
+  </footer>   
+</div>
+
+
+<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left">
+  <md-toolbar class="fondo-menu" layout="row">
+    <div class="md-toolbar-tools">
+      <h2> <span>Menu</span> </h2>
+      <span flex></span>
+
+      <md-button class="md-icon-button" aria-label="Close Side Panel" ng-click="vm.closeSideNavPanel()">
+        <md-tooltip>Cerrar Menu</md-tooltip>
+        <md-icon md-font-icon="zmdi zmdi-close"></md-icon>
+      </md-button>
+    </div>
+  </md-toolbar>
+
+  <md-content layout-padding>
+
+    <md-list>
+      <md-list-item ng-click="null">
+        <p><md-icon md-font-icon="zmdi zmdi-home"></md-icon> Inicio</p>
+      </md-list-item>
+
+      <md-divider></md-divider>
+
+      <md-list-item ng-click="null">
+        <p><md-icon md-font-icon="zmdi zmdi-book"></md-icon> Misión</p>
+      </md-list-item>
+
+      <md-list-item ng-click="null">
+        <p><md-icon md-font-icon="zmdi zmdi-graduation-cap"></md-icon> Visión</p>
+      </md-list-item>
+
+      <md-list-item ng-click="null" ui-sref="template.organigrama">
+        <p><md-icon  md-font-icon="zmdi zmdi-assignment"></md-icon> Organización</p>
+      </md-list-item>
+
+      <md-list-item ng-click="null" ui-sref="template.nosotros">
+        <p><md-icon md-font-icon="zmdi zmdi-assignment-o"></md-icon> Plan de estudios</p>
+      </md-list-item>
+
+      <md-divider></md-divider>
+
+      <md-list-item ng-click="null" ui-sref="template.login">
+        <p><md-icon  md-font-icon="fa fa-sign-in"></md-icon> Iniciar Sesión</p>
+      </md-list-item>
+
+    </md-list>
+  </md-content>
+</md-sidenav>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>

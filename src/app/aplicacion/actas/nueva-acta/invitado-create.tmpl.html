@@ -1,0 +1,68 @@
+<md-dialog flex aria-label="Agregar Usuario">
+
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Crear Nuevo Invitado</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="vm.close()">
+                <md-icon md-font-icon="zmdi zmdi-close" aria-label="cerrar dialogo"></md-icon>
+                <md-tooltip md-direction="left">Cerrar</md-tooltip>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <form name="invitado" novalidate>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+
+                <md-input-container class="md-block">
+                    <label for="nombres">Nombres</label>
+                    <input id="nombres" name="nombres" type="text" ng-model="vm.invitado.nombres" ng-pattern="/^[a-zA-Z\s]*$/" required/>
+
+                    <div ng-messages="invitado.nombres.$error" md-auto-hide="false" ng-show="invitado.nombres.$touched">
+                        <div ng-message="required">
+                            Debe ingresar un nombre del invitado.
+                        </div>
+                        <div ng-message="pattern">
+                            Debe ingresar unos nombres validos.
+                        </div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container class="md-block">
+                    <label for="apellidos">Apellidos</label>
+                    <input id="apellidos" name="apellidos" type="text" ng-model="vm.invitado.apellidos" ng-pattern="/^[a-zA-Z\s]*$/" required/>
+
+                    <div ng-messages="invitado.apellidos.$error" md-auto-hide="false" ng-show="invitado.apellidos.$touched">
+                        <div ng-message="required">
+                            Debe ingresar un apellido del invitado.
+                        </div>
+                        <div ng-message="pattern">
+                            Debe ingresar unos apellidos validos.
+                        </div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container class="md-block">
+                    <label for="profesion">Profesion</label>
+                    <input id="profesion" name="profesion" type="text" ng-model="vm.invitado.profesion" ng-pattern="/^[a-zA-Z\s]*$/" required/>
+
+                    <div ng-messages="invitado.profesion.$error" md-auto-hide="false" ng-show="usuario.profesion.$touched">
+                        <div ng-message="required">
+                            Debe ingresar una profesion del invitado.
+                        </div>
+                        <div ng-message="pattern">
+                            Debe ingresar una profesion validos.
+                        </div>
+                    </div>
+                </md-input-container>
+
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row" layout-align="end center">
+            <md-button ng-click="vm.response()" ng-disabled="invitado.$invalid" class="md-primary">Crear</md-button>
+            <md-button ng-click="vm.close()">Cancelar</md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

@@ -1,0 +1,43 @@
+<md-dialog flex aria-label="Agregar Usuario">
+
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Crear Nueva Solicitud </h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="vm.close()">
+                <md-icon md-font-icon="zmdi zmdi-close" aria-label="Cerrar Solicitud"></md-icon>
+                <md-tooltip md-direction="left">Cerrar</md-tooltip>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <form name="solicitud" novalidate>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+
+                <md-input-container class="md-block" >
+                    <label for="solicitud">Solicitud</label>
+                    <input id="solicitud" name="solicitud" type="text" ng-model="vm.solicitud.solicitud" required/>
+
+                    <div ng-messages="solicitud.solicitud.$error" md-auto-hide="false" ng-show="solicitud.solicitud.$touched">
+                        <div ng-message="required">
+                            Debe ingresar una solicitud
+                        </div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container class="md-block">
+                    <label>Descripción</label>
+                    <textarea ng-model="vm.solicitud.descripcion" rows="3"></textarea>
+                </md-input-container>
+
+
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row" layout-align="end center">
+            <md-button ng-click="vm.response()" aria-label="crear" ng-disabled="solicitud.$invalid" class="md-primary">Crear</md-button>
+            <md-button ng-click="vm.close()" aria-label="cancelar" >Cancelar</md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

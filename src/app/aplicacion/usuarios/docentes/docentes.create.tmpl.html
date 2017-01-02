@@ -1,0 +1,96 @@
+<md-dialog flex aria-label="Agregar Usuario">
+
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <h2>Crear Docente</h2>
+            <span flex></span>
+            <md-button class="md-icon-button" ng-click="vm.close()">
+                <md-icon md-font-icon="zmdi zmdi-close" aria-label="cerrar dialogo"></md-icon>
+                <md-tooltip md-direction="left">cerrar</md-tooltip>
+            </md-button>
+        </div>
+    </md-toolbar>
+
+    <form name="usuario" novalidate>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+
+                <md-input-container class="md-block">
+                    <label for="nombres">Nombres</label>
+                    <input id="nombres" name="nombres" type="text" ng-model="vm.usuario.nombres" ng-pattern="/^[a-zA-Z\s]*$/" required/>
+
+                    <div ng-messages="usuario.nombres.$error" md-auto-hide="false" ng-show="usuario.nombres.$touched">
+                        <div ng-message="required">
+                            Debe ingresar un nombre del usuario.
+                        </div>
+                        <div ng-message="pattern">
+                            Debe ingresar unos nombres validos.
+                        </div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container class="md-block">
+                    <label for="apellidos">Apellidos</label>
+                    <input id="apellidos" name="apellidos" type="text" ng-model="vm.usuario.apellidos" ng-pattern="/^[a-zA-Z\s]*$/" required/>
+
+                    <div ng-messages="usuario.apellidos.$error" md-auto-hide="false" ng-show="usuario.apellidos.$touched">
+                        <div ng-message="required">
+                            Debe ingresar un apellido del usuario.
+                        </div>
+                        <div ng-message="pattern">
+                            Debe ingresar unos apellidos validos.
+                        </div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container class="md-block">
+                    <label for="email">email</label>
+                    <input id="email" label="email" name="email" ng-pattern="/^.+@.+\..+$/" type="email" ng-model="vm.usuario.email" required/>
+
+                    <div ng-messages="usuario.email.$error" md-auto-hide="false" ng-show="usuario.email.$touched">
+                        <div ng-message="required">
+                            Debe ingresar una direccion de Email.
+                        </div>
+                        <div ng-message="pattern">
+                            Debe ingresar una direccion de Email valida.
+                        </div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container class="md-block">
+                    <label for="telefono">Telefono</label>
+                    <input id="telefono" label="telefono" name="telefono" type="number" ng-model="vm.usuario.telefono" required/>
+
+                    <div ng-messages="usuario.telefono.$error" md-auto-hide="false" ng-show="usuario.telefono.$touched">
+                        <div ng-message="required">
+                            Debe ingresar un telefono.
+                        </div>
+                        <div ng-message="number">
+                            Debe ingresar un telefono valido.
+                        </div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container class="md-block">
+                    <label for="rol">Rol</label>
+                    <md-select placeholder="rol" name="rol" ng-model="vm.usuario.rol" required>
+                        <md-option value="ADMINISTRADOR">Administrador</md-option>
+                        <md-option value="DOCENTE">Docente</md-option>
+                        <md-option value="ESTUDIANTE">Estudiante</md-option>
+                    </md-select>
+                    <div ng-messages="usuario.rol.$error" md-auto-hide="false" ng-show="usuario.rol.$touched">
+                        <div ng-message="required">
+                            Debe selecionar un rol.
+                        </div>
+                    </div>
+                </md-input-container>
+
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row" layout-align="end center">
+            <md-button ng-click="vm.response()" ng-disabled="usuario.$invalid" class="md-primary">Guardar</md-button>
+            <md-button ng-click="vm.close()">Cancelar</md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

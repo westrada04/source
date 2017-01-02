@@ -1,0 +1,226 @@
+<md-content class="padded-content-page md-padding">
+
+    <div flex layout="row" layout-align="center center" layout-fill>
+        <md-card flex="90" class="tri-wizard-card md-whiteframe-z1 margin-bottom-100" tri-wizard>
+
+            <md-toolbar class="md-primary">
+                <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
+                    <h2>Registro de Nueva Acta</h2>
+                    <h2> {{triWizard.progress}}% <span>Completo</span></h2>
+                </div>
+                <md-progress-linear class="md-accent padding-bottom-10" md-mode="determinate" ng-value="triWizard.progress"></md-progress-linear>
+            </md-toolbar>
+
+            <md-card-content>
+                <md-tabs class="md-primary" layout-fill md-selected="triWizard.currentStep" md-dynamic-height>
+
+                    <md-tab id="integrantes">
+                        <md-tab-label>
+                            <span class="oxy-step-label">1</span>
+                            <span>Integrantes de la reunion</span>
+                        </md-tab-label>
+
+                        <md-tab-body>
+                            <md-content class="md-padding">
+                                <form name="integranteFrom" tri-wizard-form novalidate>
+                                    <div>
+
+                                        <md-input-container class="md-block fecha">
+                                            <label for="solicitud">Fecha de la reunion</label>
+                                            <input time="false" name="fecha" date="true" mdc-datetime-picker="" type="text" id="date" ng-model="vm.fecha" min-date="minDate" max-date="maxDate" class=" md-input" required>
+
+                                            <div ng-messages="integrantes.fecha.$error" md-auto-hide="false" ng-show="integrantes.fecha.$touched">
+                                                <div ng-message when="valid">
+                                                    <span>El valor introducido no es una fecha!</span>
+                                                </div>
+                                                <div ng-message when="required">
+                                                    <span>La fecha es obligatoria!</span>
+                                                </div>
+                                            </div>
+                                        </md-input-container>
+
+                                        <div layout="row" layout-xs="column">
+                                            <div flex>
+                                                <md-input-container class="contant">
+                                                    <md-subheader>Integrantes del Consejo</md-subheader>
+                                                </md-input-container>
+                                            </div>
+                                            <div flex>
+                                                <md-input-container class="contant">
+                                                    <label>Buscar Integrante</label>
+                                                    <input ng-model="vm.filtrarIntegrante" type="text">
+                                                </md-input-container>
+                                            </div>
+                                        </div>
+
+                                        <md-list class="make-westrada" flex>
+                                            <md-list-item class="md-1-line" ng-repeat="integrante in vm.integrantes | toArray:false | filter:vm.filtrarIntegrante">
+                                                <md-checkbox ng-click="vm.changeIntegrantes(integrante)"></md-checkbox>
+                                                <div class="md-list-item-text">
+                                                    <p>{{integrante.nombres + ' - ' + integrante.apellidos + ' - ' + integrante.cargo }}</p>
+                                                </div>
+
+                                            </md-list-item>
+                                        </md-list>
+
+                                        <div layout="row" layout-xs="column">
+                                            <div flex>
+                                                <md-input-container class="contant">
+                                                    <md-subheader>Invitados a reunion del Consejo</md-subheader>
+                                                </md-input-container>
+                                            </div>
+                                            <div flex>
+                                                <md-button class="md-icon-button" aria-label="Agregar Invitado" ng-click="vm.crearInvitado($event)">
+                                                    <md-icon md-font-icon="zmdi zmdi-account-add"></md-icon>
+                                                    <md-tooltip>Agregar Invitado</md-tooltip>
+                                                </md-button>
+
+                                                <md-input-container class="contant">
+                                                    <label>Buscar Invitado</label>
+                                                    <input ng-model="vm.filtrarInvitado" type="text">
+                                                </md-input-container>
+                                            </div>
+                                        </div>
+
+                                        <md-list class="make-westrada" flex>
+                                            <md-list-item class="md-1-line" ng-repeat="invitado in vm.invitados | toArray:false | filter:vm.filtrarInvitado">
+                                                <md-checkbox ng-click="vm.changeInvitados(invitado)"></md-checkbox>
+                                                <div class="md-list-item-text">
+                                                    <p>{{invitado.nombres + ' - ' + invitado.apellidos + ' - ' + invitado.profesion }}</p>
+                                                </div>
+
+                                            </md-list-item>
+                                        </md-list>
+                                    </div>
+                                </form>
+                            </md-content>
+                        </md-tab-body>
+
+                    </md-tab>
+
+                    <md-tab id="solicitudes" ng-disabled="integranteForm.$invalid">
+                        <md-tab-label>
+                            <span class="oxy-step-label">2</span>
+                            <span translate>Solicitudes </span>
+                        </md-tab-label>
+
+                        <md-tab-body>
+                            <md-content class="md-padding">
+                                <form name="solicitudForm" tri-wizard-form>
+                                    <div>
+                                        <div layout="row" layout-xs="column">
+                                            <div flex>
+                                                <md-input-container class="contant">
+                                                    <md-subheader>Solicitudes Disponibles</md-subheader>
+                                                </md-input-container>
+                                            </div>
+                                            <div flex>
+
+                                                <md-button class="md-icon-button" aria-label="Agregar Solicitud" ng-click="vm.crearSolicitud($event)">
+                                                    <md-icon md-font-icon="zmdi zmdi-assignment-o"></md-icon>
+                                                    <md-tooltip>Agregar Solicitud</md-tooltip>
+                                                </md-button>
+
+                                                <md-input-container class="contant">
+                                                    <label>Buscar Solicitud</label>
+                                                    <input ng-model="vm.filtrarSolicitud" type="text">
+                                                </md-input-container>
+                                            </div>
+                                        </div>
+
+                                        <md-list class="make-solicitud md-dense" flex>
+                                            <md-list-item class="md-3-line" ng-repeat="solicitud in vm.solicitudes | toArray:false | filter:vm.filtrarSolicitud">
+                                                <md-checkbox ng-click="vm.changeSolicitudes(solicitud)"></md-checkbox>
+                                                <div class="md-list-item-text" layout="column">
+                                                    <h3>{{ solicitud.nombre }}</h3>
+                                                    <h4>{{ solicitud.solicitud }}</h4>
+                                                    <p>{{ solicitud.descripcion }}</p>
+                                                </div>
+
+                                            </md-list-item>
+                                        </md-list>
+                                    </div>
+                                </form>
+                            </md-content>
+                        </md-tab-body>
+                    </md-tab>
+
+                    <md-tab id="detalles" ng-disabled="solicitudForm.$invalid">
+                        <md-tab-label>
+                            <span class="oxy-step-label">3</span>
+                            <span translate>Detalles</span>
+                        </md-tab-label>
+                        <md-tab-body>
+                            <md-content class="md-padding">
+                                <form name="detalleForm" tri-wizard-form>
+                                    <div>
+
+                                        <md-input-container class="md-block">
+                                            <label for="lugar">Lugar de reunion</label>
+                                            <md-select placeholder="selecionar lugar de reunion" name="lugar" ng-model="vm.lugar" data-md-container-class="selectdemoSelectHeader" required>
+
+                                                <md-select-header class="demo-select-header">
+                                                    <input ng-model="vm.filtrarLugar" type="search" placeholder="Buscar Lugar" class="demo-header-searchbox md-text" ng-keydown="vm.onSearchChange($event)">
+                                                </md-select-header>
+
+                                                <md-optgroup label="reunion">
+                                                    <md-option ng-value="lugar.id" ng-repeat="lugar in vm.lugares | filter:vm.filtrarLugar">{{ lugar.nombre }}</md-option>
+                                                </md-optgroup>
+
+                                            </md-select>
+                                            <div ng-messages="detalleForm.lugar.$error" md-auto-hide="false" ng-show="detalleForm.lugar.$touched">
+                                                <div ng-message="required">
+                                                    Debe Especificar un Lugar.
+                                                </div>
+                                            </div>
+                                        </md-input-container>
+
+                                        <br>
+
+                                        <md-input-container class="md-block">
+                                            <label for="horaInicial">Hora Inicial de la reunion</label>
+                                            <input mdc-datetime-picker="" date="false" time="true" type="text" id="horaInicial" short-time="true" min-date="minDate" name="horaInicial" format="hh:mm a" ng-model="vm.horaInicial"  class=" md-input" required>
+                                            <div ng-messages="detalleForm.horaInicial.$error" md-auto-hide="false" ng-show="detalleForm.horaInicial.$touched">
+                                                <div ng-message when="valid">
+                                                    <span>El valor introducido no es una fecha!</span>
+                                                </div>
+                                                <div ng-message when="required">
+                                                    <span>La fecha es obligatoria!</span>
+                                                </div>
+                                            </div>
+                                        </md-input-container>
+
+                                        <md-input-container class="md-block">
+                                            <label for="horaFinal">Hora Final de la reunion</label>
+                                            <input mdc-datetime-picker="" date="false" time="true" type="text" id="horaFinal" short-time="true" min-date="minDate" name="horaFinal" format="hh:mm a" ng-model="vm.horaFinal" class="md-input" required>
+                                            <div ng-messages="detalleForm.horaFinal.$error" md-auto-hide="false" ng-show="detalleForm.horaFinal.$touched">
+                                                <div ng-message when="valid">
+                                                    <span>El valor introducido no es una fecha!</span>
+                                                </div>
+                                                <div ng-message when="required">
+                                                    <span>La fecha es obligatoria!</span>
+                                                </div>
+                                            </div>
+                                        </md-input-container>
+
+                                    </div>
+                                </form>
+                            </md-content>
+                        </md-tab-body>
+                    </md-tab>
+
+                </md-tabs>
+
+            </md-card-content>
+
+            <md-card-actions layout="row" layout-align="end center">
+                <md-button class="md-primary md-raised" ng-click="triWizard.prevStep()" ng-hide="triWizard.currentStep < 1" ng-disabled="triWizard.prevStepDisabled()" aria-label="Atras" translate="Atras"></md-button>
+                
+                <md-button class="md-primary md-raised" ng-click="triWizard.nextStep()" ng-hide="triWizard.progress == 100 || triWizard.currentStep > 1" ng-disabled="triWizard.nextStepDisabled()" aria-label="Siguiente" translate="Siguiente"></md-button>
+                
+                <md-button class="md-accent md-raised" ng-click="vm.enviar()" ng-show="triWizard.progress == 100 || triWizard.currentStep == 2" ng-disabled="integranteFrom.$invalid || detalleForm.$invalid || solicitudForm.$invalid" aria-label="Enviar" translate="Enviar"></md-button>
+            </md-card-actions>
+    </div>
+    </md-card>
+
+</md-content>
